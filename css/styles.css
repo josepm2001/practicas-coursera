@@ -1,0 +1,28 @@
+body {
+    font-family: "Lucida Handwriting", Arial, Helvetica, sans-serif;
+    /*color: green;
+    background-color: green;*/
+}
+#header-nav {
+    background-color: #83c3ff;
+    color: green;
+    border-radius: 0;
+    border: 0;
+}
+div p {
+    text-align:center;
+}
+#home-tiles div{
+    background-color: lightgrey;
+}
+#div1,#div2,#div3{
+	margin-top: 15px;
+}
+#nav-list {
+    
+    text-align: center;
+  }
+#nav-list a:hover {
+    background: #E7E7E7;
+    
+  }
