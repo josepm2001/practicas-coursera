@@ -63,38 +63,34 @@ var switchMenuToActive = function () {
 // On page load (before images or CSS)
 document.addEventListener("DOMContentLoaded", function (event) {
 
-// On first load, show home view
+// TODO: PASO 0: Revise el código de
+// *** comienzo ***
+// a
+// *** finalizar ***
+// debajo.
+// Cambiamos este código para recuperar todas las categorías del servidor en lugar de
+// simplemente solicitando un fragmento de HTML de inicio. Ahora también tenemos otra función
+// llamado buildAndShowHomeHTML que recibirá todas las categorías del servidor
+// y procesarlos: elegir una categoría aleatoria, recuperar el fragmento HTML de inicio, insertarlo
+// categoría aleatoria en el fragmento de HTML de inicio y luego inserte ese fragmento en nuestro
+// página principal (index.html).
+//
+// TODO: PASO 1: Sustituya [...] a continuación con el * valor * de la función buildAndShowHomeHTML,
+// para que se pueda llamar cuando el servidor responda con los datos de las categorías.
+
+// *** comienzo ***
+// En la primera carga, muestra la vista de inicio
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
-  homeHtmlUrl,
-  function (responseText) {
-    document.querySelector("#main-content")
-      .innerHTML = responseText;
-  },
-  false);
+  allCategoriesUrl,
+  [...], // ***** <---- TODO: PASO 1: Sustituir [...] ******
+  true); // Establecer explícitamente la bandera para obtener JSON del servidor procesado en un objeto literal
 });
-
-// Load the menu categories view
-dc.loadMenuCategories = function () {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    allCategoriesUrl,
-    buildAndShowCategoriesHTML);
-};
+// *** finalizar **
 
 
-// Load the menu items view
-// 'categoryShort' is a short_name for a category
-dc.loadMenuItems = function (categoryShort) {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    menuItemsUrl + categoryShort,
-    buildAndShowMenuItemsHTML);
-};
-
-
-// Builds HTML for the home page based on categories array
-// returned from the server.
+// Construye HTML para la página de inicio según la matriz de categorías
+// regresó del servidor.
 function buildAndShowHomeHTML (categories) {
 
   // Load home snippet page
@@ -102,19 +98,30 @@ function buildAndShowHomeHTML (categories) {
     homeHtmlUrl,
     function (homeHtml) {
 
-      $ajaxUtils.sendGetRequest(
-        categoryHtml,
-        function (categoryHtml) {
-          // Switch CSS class active to menu button
-          switchMenuToActive();
+      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
+      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
+      // variable's name implies it expects.
+      // var chosenCategoryShortName = ....
 
-          var categoriesViewHtml =
-            buildCategoriesViewHtml(categories,
-                                    categoriesTitleHtml,
-                                    categoryHtml);
-          insertHtml("#main-content", categoriesViewHtml);
-        },
-        false);
+
+      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
+      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
+      // Look through this code for an example of how to do use the insertProperty function.
+      // WARNING! You are inserting something that will have to result in a valid Javascript
+      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
+      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
+      // to look like. For example, a valid call would look something like this:
+      // $dc.loadMenuItems('L')
+      // Hint: you need to surround the chosen category short name with something before inserting
+      // it into the home html snippet.
+      //
+      // var homeHtmlToInsertIntoMainPage = ....
+
+
+      // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
+      // Use the existing insertHtml function for that purpose. Look through this code for an example
+      // of how to do that.
+      // ....
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
