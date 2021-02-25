@@ -75,6 +75,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // categoría aleatoria en el fragmento de HTML de inicio y luego inserte ese fragmento en nuestro
 // página principal (index.html).
 //
+
+// Load the menu categories view -----------------------------------------------------------------------------------------------
+dc.loadMenuCategories = function () {
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    allCategoriesUrl,
+    buildAndShowCategoriesHTML);
+};
+// Load the menu categories view -----------------------------------------------------------------------------------------------
+
 // TODO: PASO 1: Sustituya [...] a continuación con el * valor * de la función buildAndShowHomeHTML,
 // para que se pueda llamar cuando el servidor responda con los datos de las categorías.
 
