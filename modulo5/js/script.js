@@ -75,16 +75,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // categoría aleatoria en el fragmento de HTML de inicio y luego inserte ese fragmento en nuestro
 // página principal (index.html).
 //
-
-// Load the menu categories view -----------------------------------------------------------------------------------------------
-dc.loadMenuCategories = function () {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    allCategoriesUrl,
-    buildAndShowCategoriesHTML);
-};
-// Load the menu categories view -----------------------------------------------------------------------------------------------
-
 // TODO: PASO 1: Sustituya [...] a continuación con el * valor * de la función buildAndShowHomeHTML,
 // para que se pueda llamar cuando el servidor responda con los datos de las categorías.
 
@@ -93,7 +83,7 @@ dc.loadMenuCategories = function () {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  [...], // ***** <---- TODO: PASO 1: Sustituir [...] ******
+  buildAndShowHomeHTML, // ***** <---- TODO: PASO 1: Sustituir [...] ******
   true); // Establecer explícitamente la bandera para obtener JSON del servidor procesado en un objeto literal
 });
 // *** finalizar **
@@ -108,31 +98,33 @@ function buildAndShowHomeHTML (categories) {
     homeHtmlUrl,
     function (homeHtml) {
 
-      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
-      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
-      // variable's name implies it expects.
-      // var chosenCategoryShortName = ....
+       // TODO: PASO 2: Aquí, llame a chooseRandomCategory, pasándole las 'categorías' recuperadas
+       // Preste atención a qué tipo de datos devuelve esa función frente a lo que eligióCategoryShortName
+       // el nombre de la variable implica que espera.
+       // var selectedCategoryShortName = ....
 
 
-      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
-      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
-      // Look through this code for an example of how to do use the insertProperty function.
-      // WARNING! You are inserting something that will have to result in a valid Javascript
-      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
-      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
-      // to look like. For example, a valid call would look something like this:
-      // $dc.loadMenuItems('L')
-      // Hint: you need to surround the chosen category short name with something before inserting
-      // it into the home html snippet.
-      //
-      // var homeHtmlToInsertIntoMainPage = ....
-
-
-      // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
-      // Use the existing insertHtml function for that purpose. Look through this code for an example
-      // of how to do that.
-      // ....
-
+       // TODO: PASO 3: Sustituya {{randomCategoryShortName}} en el fragmento html de inicio con el
+       // categoría elegida del PASO 2. Utilice la función insertProperty existente para ese propósito.
+       // Mire este código para ver un ejemplo de cómo usar la función insertProperty.
+       // ¡ADVERTENCIA! Está insertando algo que tendrá como resultado un Javascript válido
+       // sintaxis porque la sustitución de {{randomCategoryShortName}} se convierte en un argumento
+       // se pasa a la función $ dc.loadMenuItems. Piense en lo que necesita ese argumento
+       // para parecerse a. Por ejemplo, una llamada válida se vería así:
+       // $ dc.loadMenuItems ('L')
+       // Sugerencia: debe rodear el nombre corto de la categoría elegida con algo antes de insertar
+       // en el fragmento html de inicio.
+       //
+       // var homeHtmlToInsertIntoMainPage = ....
+        var chosenCategoryShortName 
+           = chooseRandomCategory(categories).short_name;
+        var homeHtmlToInsertIntoMainPage
+           = insertProperty(homeHtml,"randomCategoryShortName","'" + chosenCategoryShortName + "'");
+      // TODO: PASO 4: Inserte el HTML producido en el PASO 3 en la página principal
+       // Utilice la función insertHtml existente para ese propósito. Mira este código para ver un ejemplo
+       // de cómo hacer eso.
+       // ....
+       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
