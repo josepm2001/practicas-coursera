@@ -102,7 +102,7 @@ function buildAndShowHomeHTML (categories) {
        // Preste atención a qué tipo de datos devuelve esa función frente a lo que eligióCategoryShortName
        // el nombre de la variable implica que espera.
        // var selectedCategoryShortName = ....
-
+       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
 
        // TODO: PASO 3: Sustituya {{randomCategoryShortName}} en el fragmento html de inicio con el
        // categoría elegida del PASO 2. Utilice la función insertProperty existente para ese propósito.
@@ -116,8 +116,8 @@ function buildAndShowHomeHTML (categories) {
        // en el fragmento html de inicio.
        //
        // var homeHtmlToInsertIntoMainPage = ....
-       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
-       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", "'" + chosenCategoryShortName + "'");
+       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", `'${chosenCategoryShortName}'`);
+       
       // TODO: PASO 4: Inserte el HTML producido en el PASO 3 en la página principal
        // Utilice la función insertHtml existente para ese propósito. Mira este código para ver un ejemplo
        // de cómo hacer eso.
